@@ -1,0 +1,34 @@
+<% include header %>
+	<div class="g-page-title f-fl">
+		<h1>后台登录</h1>
+	</div>
+	<div class="m-login-left f-fl">
+		<div class="m-login-box">		
+			<form class="form-horizontal" role="form" method="post" action="/user/login">
+				<div class="form-group">
+				    <label for="username" class="col-sm-3 control-label f-fs2 f-fwn">用户名：</label>
+				    <div class="col-sm-9">
+				      	<input type="text" class="form-control" id="username">
+				    </div>
+				</div>
+				<div class="u-block"></div><div class="u-block"></div><div class="u-block"></div>
+				<div class="form-group">
+				    <label for="password" class="col-sm-3 control-label f-fs2 f-fwn">密　码：</label>
+				    <div class="col-sm-9">
+				      	<input type="password" class="form-control" id="password">
+				    </div>
+				</div>
+				<div class="u-block"></div><div class="u-block"></div><div class="u-block"></div>
+				<div class="form-group">
+				    <div class="col-sm-offset-2 col-sm-10">
+				      	　　　　　　　　<button type="submit" class="btn btn-info">登　录</button>　　　　
+				      	<button type="submit" class="btn btn-danger">注　册</button>
+				    </div>
+				</div>
+			</form>
+		</div>
+	</div>
+
+	<div class="m-login-right f-fr"></div>
+	<div class="f-cl"></div>
+<% include footer %>

@@ -1,0 +1,21 @@
+<% include header %>
+<div class="m-content f-fl">	
+	<% article.forEach(function(vo, key){ %>
+		<div class="m-wrap">
+			<div class="u-cate f-fl"><span class="u-cate-ico f-db"></span></div>
+			<div class="u-pic f-fl"><img src="<%= vo.pic %>" alt=""></div>
+			<div class="u-title f-fr"><a href="#"><%= vo.title %></a></div>
+			<div class="u-summary f-fr"><%= vo.summary %></div>
+			<div class="u-info f-fr">发布时间：<%= vo.meta.createAt %>　　评论数：15</div>
+		</div>	
+	<% }) %>
+
+</div>
+<div class="m-rightbar f-fr">
+	<div class="u-avatar f-fl">
+		<img src="http://img.mukewang.com/user/533e4d660001312002000200-220-220.jpg" alt="">
+	</div>
+</div>
+<div class="f-cl"></div>
+<% include footer %>
+		
