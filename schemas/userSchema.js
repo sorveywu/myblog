@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 var schema = mongoose.Schema;
 
-var userShema = new schema({
+var userSchema = new schema({
 	email: String,
 	password: String,
 	nickname: String,
@@ -18,7 +18,7 @@ var userShema = new schema({
 	}
 })
 
-userShema.pre('save', function(next){
+userSchema.pre('save', function(next){
 	if(this.isNew){
 		this.meta.createAt = this.meta.updateAt = Date.now();
 	}else{
@@ -27,7 +27,7 @@ userShema.pre('save', function(next){
 	next();
 })
 
-userShema.statics = {
+userSchema.statics = {
 	fetch: function(cb){
 
 	},
@@ -36,4 +36,4 @@ userShema.statics = {
 	}
 }
 
-module.exports = userShema;
+module.exports = userSchema;
