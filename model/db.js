@@ -24,4 +24,6 @@ var UserSchema = new Schema({
 
 })
 
+mongoose.model('user', UserSchema)
+
 	
