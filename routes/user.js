@@ -1,36 +1,23 @@
 var express = require('express');
 var router = express.Router();
 
-var mongoose = require('mongoose');
-mongoose.connect('127.0.0.1:27017/blog');
-
-var User = require('../model/userModel');
+var User = require('../model/user');
 
 /* GET users listing. */
 router.get('/', function(req, res) {
-  	res.send('respond with a resource');
+	res.send('user page');
 });
 
 router.get('/login', function(req, res, next){
-	User.findById('53e32f95e5b508f7de9b710c', function(err, result){
-		if(err){
-			console.log(err);
-		}else{
-			res.send(result);
-		}
+	res.render('login', {
+		title: '用户登录'
 	})
 })
 
-router.get('/reg', function(req, res, next){
-	res.render('login', {
-		title: '用户登录'
-	});
-})
-
-router.post('/login', function(res, req){
+router.post('/login', function(req, res){
 	var username = req.body.username,
 		password = req.body.password;
-
+	res.redirect('login');
 })
 
 module.exports = router;

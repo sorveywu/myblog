@@ -21,8 +21,9 @@ var UserSchema = new Schema({
 			default: Date.now()
 		}
 	}
-
 })
+
+var UserModel = mongoose.model('user', UserSchema, 'user');
 
 mongoose.model('user', UserSchema)
 
