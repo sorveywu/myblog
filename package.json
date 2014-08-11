@@ -16,6 +16,7 @@
     "mongoose": "*",
     "crypto": "*",
     "connect-mongo": "*",
-    "express-session": "*"
+    "express-session": "*",
+    "connect-flash": "*"
   }
 }

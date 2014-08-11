@@ -9,12 +9,13 @@ var bodyParser   = require('body-parser');
 var session      = require('express-session');
 var MongoStore   = require('connect-mongo')(session);
 var settings     = require('./settings');
+//使用flash
+var flash = require('connect-flash');
 
 var routes       = require('./routes/index');
 var user         = require('./routes/user');
 
 var app          = express();
-
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
@@ -24,7 +25,7 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
 //session
-app.use(express.cookieParser());
+app.use(cookieParser());
 app.use(session({
     secret: settings.cookieSecret,
     key: settings.db,//cookie name
@@ -35,6 +36,7 @@ app.use(session({
 }));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'bower_components')));
+app.use(flash());
 
 app.use('/', routes);
 app.use('/user', user);

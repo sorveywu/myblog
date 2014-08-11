@@ -1,0 +1,49 @@
+<% include header %>
+	<div class="g-page-title f-fl">
+		<h1>用户注册</h1>
+	</div>
+	<div class="m-login-left f-fl">
+		<div class="m-login-box">		
+			<form class="form-horizontal" role="form" method="post" action="/user/reg">
+				<div class="form-group">
+				    <label for="email" class="col-sm-3 control-label f-fs2 f-fwn">邮　箱：</label>
+				    <div class="col-sm-9">
+				      	<input type="email" name="email" class="form-control" id="email" placeholder="您的邮箱账号，作登录用">
+				    </div>
+				</div>
+				<div class="u-block"></div><div class="u-block"></div>
+				<div class="form-group">
+				    <label for="password" class="col-sm-3 control-label f-fs2 f-fwn">密　码：</label>
+				    <div class="col-sm-9">
+				      	<input type="password" name="password" class="form-control" id="password" placeholder="请输入密码">
+				    </div>
+				</div>
+				<div class="u-block"></div><div class="u-block"></div>
+				<div class="form-group">
+				    <label for="repassword" class="col-sm-3 control-label f-fs2 f-fwn">确认密码：</label>
+				    <div class="col-sm-9">
+				      	<input type="password" name="repassword" class="form-control" id="repassword" placeholder="确认密码">
+				    </div>
+				</div>			
+				<div class="form-group">
+					<label class="col-sm-3 f-fs1 f-fwn"></label>
+				    <label class="col-sm-9 f-fs1 f-fwn">
+				    	<% if (error) { %>
+				    		<p class="text-danger">*<%= error %></p>
+				    	<% }else{ %>
+				    		<p class="text-danger">　　　</p>
+				    	<% } %>
+				    </label>
+				</div>
+				<div class="form-group">
+				    <div class="col-sm-offset-2 col-sm-10">
+				      	　　　　　　　　<button type="submit" class="btn btn-info">提　交</button>
+				    </div>
+				</div>
+			</form>
+		</div>
+	</div>
+
+	<div class="m-login-right f-fr"></div>
+	<div class="f-cl"></div>
+<% include footer %>

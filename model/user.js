@@ -1,7 +1,6 @@
 var mongoose = require('mongoose');
 var db = mongoose.connect('mongodb://127.0.0.1/blog');
-var	Schema = mongoose.Schema,
-	crypto = require('crypto');
+var	Schema = mongoose.Schema;
 
 
 var UserSchema = new Schema({
@@ -28,7 +27,7 @@ var UserSchema = new Schema({
 
 UserSchema.statics = {
 	findByEmail : function(email, cb){
-		return this.findOne({ email: email}).exec(cb);
+		return this.findOne({'email.normal': email}).exec(cb);
 	}
 }
 
