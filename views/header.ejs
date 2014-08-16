@@ -22,8 +22,49 @@
 			<ul class="u-header-link f-fr">
 				<li><a href="#" title="关于我"><span class="glyphicon glyphicon-send"></span></a></li>
 				<li><a href="#" title="给我留言"><span class="glyphicon glyphicon-comment"></span></a></li>
+				<% if(user){ %>
+				<li><a href="#" id="userinfo" onmouseover="mopen('m-userinfo')" onmouseout="mclosetime()"><img src="http://www.gravatar.com/avatar/<%= user.email.md5 %>?size=36" alt="sorvey" class="img-circle f-b2"></a></li>
+				<div id="m-userinfo" class="m-userinfo" onMouseOver="mcancelclosetime()" onMouseOut="mclosetime()" style="visibility:hidden">
+		            <div class="u-user-block"><a href="/user/details"><span class="glyphicon glyphicon-user"></span>　Sorvey</a></div>
+		            <div class="u-user-block"><a href="/user/details"><span class="glyphicon glyphicon-pencil"></span>　新建文章</a></div>
+		            <div class="u-user-block"><a href="/user/details"><span class="glyphicon glyphicon-cog"></span>　我的设置</a></div>
+		       		<div class="u-user-block"><a href="/user/logout"><span class="glyphicon glyphicon-log-out"></span>　退出</a></div>
+		        </div>
+				<% } %>
 			</ul>
 		</div>
+
+		  <script type="text/javascript">
+			var timeout = 100;
+			var closetimer= 0;
+			var ddmenuitem = 0;
+			function mopen(id)
+			{	
+				mcancelclosetime();
+				if(ddmenuitem) ddmenuitem.style.visibility = 'hidden';
+				ddmenuitem = document.getElementById(id);
+				ddmenuitem.style.visibility = 'visible';
+				document.getElementById('userinfo').style.backgroundColor = '#363d40';
+			}
+			function mclose()
+			{
+				if(ddmenuitem) ddmenuitem.style.visibility = 'hidden';
+				document.getElementById('userinfo').style.backgroundColor = '#2a2c2e';
+			}
+			function mclosetime()
+			{
+				closetimer = window.setTimeout(mclose, timeout);
+			}
+			function mcancelclosetime()
+			{
+				if(closetimer)
+				{
+					window.clearTimeout(closetimer);
+					closetimer = null;
+				}
+			}
+			document.onclick = mclose; 
+		</script>
 	</div>
 	<div class="g-container">
 		<div class="g-main">

@@ -9,27 +9,32 @@ router.get('/', function(req, res) {
 	res.send('user page');
 });
 
+router.get('/login', checkNotLogin);
 router.get('/login', function(req, res){
 	res.render('login', {
 		title: '用户登录',
+		user: req.session.user,
 		success: req.flash('success').toString(),
 		error: req.flash('error').toString()
 	})
 })
-
+router.post('/login', checkNotLogin);
 router.post('/login', function(req, res){
 	var email = req.body.email,
 		password = req.body.password,
 		email_md5 = crypto.createHash('md5'),
 		pwd_md5 = crypto.createHash('md5');
-	var data = {
-		'email.normal': email,
-		'password': pwd_md5.update(password).digest('hex')
+	var user = {
+		email: {
+			normal: email,
+			md5: email_md5.update(email).digest('hex')
+		},
+		password: pwd_md5.update(password).digest('hex')
 	}
-	var count = User.count(data, function(err, result){
-		if(result == 1){
-			req.flash('success', '用户注册成功，请登录！');
-			res.redirect('login');
+	var count = User.findOne(user, 'email meta', function(err, doc){
+		if(doc){
+			req.session.user = doc;
+			res.redirect('/');
 		}else{
 			req.flash('error', '用户名或密码错误！');
 			res.redirect('login');
@@ -43,10 +48,11 @@ router.get('/reg', checkNotLogin);
 router.get('/reg', function(req, res){
 	res.render('reg', {
 		title: '用户注册',
+		user: req.session.user,
       	error: req.flash('error').toString()
 	})
 })
-
+router.post('/reg', checkNotLogin);
 router.post('/reg', function(req, res){
 	var email = req.body.email,
 		password = req.body.password,
@@ -83,10 +89,15 @@ router.post('/reg', function(req, res){
 		})
 	}
 })
+router.get('/logout', checkLogin);
+router.get('/logout', function(req, res){
+	req.session.user = null;
+	res.redirect('/');
+})
 
-function checkLogin(req, res, next){
+function checkLogin(req, res, next){	//判断用户是不是已登录
 	if(!req.session.user){
-		req.flash('error', '用户未登录');
+		req.flash('error', '您还没有登录！');
 		res.redirect('login');
 	}
 	next();
@@ -94,8 +105,8 @@ function checkLogin(req, res, next){
 
 function checkNotLogin(req, res, next){
 	if(req.session.user){
-		req.flash('error', '已登录');
-		res.redirect('back');	//返回之前的页面
+		req.flash('error', '您已登录，请注销后再进行操作！');
+		res.redirect('/');	//返回之前的页面
 	}
 	next();
 }

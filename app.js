@@ -14,6 +14,7 @@ var flash = require('connect-flash');
 
 var routes       = require('./routes/index');
 var user         = require('./routes/user');
+var post         = require('./routes/post');
 
 var app          = express();
 // view engine setup
@@ -40,6 +41,7 @@ app.use(flash());
 
 app.use('/', routes);
 app.use('/user', user);
+app.use('/post', post);
 
 /// catch 404 and forward to error handler
 app.use(function(req, res, next) {

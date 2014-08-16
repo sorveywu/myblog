@@ -45,9 +45,11 @@ router.get('/', function(req, res) {
 			}
 		}
 	]
+
   	res.render('index', { 
   		title: '一个奔向工程师的程序员',
-  		article: article
+  		article: article,
+  		user: req.session.user
   	});
 });
 

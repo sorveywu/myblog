@@ -28,6 +28,9 @@ var UserSchema = new Schema({
 UserSchema.statics = {
 	findByEmail : function(email, cb){
 		return this.findOne({'email.normal': email}).exec(cb);
+	},
+	findUser : function(user, cb){
+		return this.findOne(user).exec(cb);
 	}
 }
 
