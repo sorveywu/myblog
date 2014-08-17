@@ -46,7 +46,7 @@ router.get('/', function(req, res) {
 		}
 	]
 
-  	res.render('index', { 
+  	res.render('home/index', { 
   		title: '一个奔向工程师的程序员',
   		article: article,
   		user: req.session.user

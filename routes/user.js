@@ -11,7 +11,7 @@ router.get('/', function(req, res) {
 
 router.get('/login', checkNotLogin);
 router.get('/login', function(req, res){
-	res.render('login', {
+	res.render('home/login', {
 		title: '用户登录',
 		user: req.session.user,
 		success: req.flash('success').toString(),
@@ -46,7 +46,7 @@ router.post('/login', function(req, res){
 
 router.get('/reg', checkNotLogin);
 router.get('/reg', function(req, res){
-	res.render('reg', {
+	res.render('home/reg', {
 		title: '用户注册',
 		user: req.session.user,
       	error: req.flash('error').toString()
