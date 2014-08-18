@@ -3,68 +3,24 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title><%= title %></title>
+	<title></title>
 	<link rel="stylesheet" type="text/css" href="/bootstrap/dist/css/bootstrap.min.css">
-	<link rel="stylesheet" type="text/css" href="/stylesheets/style.css">
+	<link rel="stylesheet" type="text/css" href="/stylesheets/admin.css">
 	<script src="/jquery/dist/jquery.min.js"></script>
 	<script src="/bootstrap/dist/js/bootstrap.min.js"></script>
 </head>
 <body>
 	<div class="g-header">
 		<div class="m-header-con">
-			<div class="u-logo f-fl"><a href="/"><img src="/images/logo_index.png" alt=""></a></div>
-			<ul class="u-menu f-fl">
-				<li><a href="">编程语言</a></li>
-				<li><a href="">数据库</a></li>
-				<li><a href="">随笔</a></li>
-				<li><a href="">娱乐</a></li>
-			</ul>
-			<ul class="u-header-link f-fr">
-				<li><a href="#" title="关于我"><span class="glyphicon glyphicon-send"></span></a></li>
-				<li><a href="#" title="给我留言"><span class="glyphicon glyphicon-comment"></span></a></li>
-				<% if(user){ %>
-				<li><a href="#" id="userinfo" onmouseover="mopen('m-userinfo')" onmouseout="mclosetime()"><img src="http://www.gravatar.com/avatar/<%= user.email.md5 %>?size=36" alt="sorvey" class="img-circle f-b2"></a></li>
-				<div id="m-userinfo" class="m-userinfo" onMouseOver="mcancelclosetime()" onMouseOut="mclosetime()" style="visibility:hidden">
-		            <div class="u-user-block"><a href="/user/details"><span class="glyphicon glyphicon-user"></span>　Sorvey</a></div>
-		            <div class="u-user-block"><a href="/user/details"><span class="glyphicon glyphicon-pencil"></span>　新建文章</a></div>
-		            <div class="u-user-block"><a href="/user/details"><span class="glyphicon glyphicon-cog"></span>　我的设置</a></div>
-		       		<div class="u-user-block"><a href="/user/logout"><span class="glyphicon glyphicon-log-out"></span>　退出</a></div>
-		        </div>
-				<% } %>
-			</ul>
+		
 		</div>
-
-		  <script type="text/javascript">
-			var timeout = 100;
-			var closetimer= 0;
-			var ddmenuitem = 0;
-			function mopen(id)
-			{	
-				mcancelclosetime();
-				if(ddmenuitem) ddmenuitem.style.visibility = 'hidden';
-				ddmenuitem = document.getElementById(id);
-				ddmenuitem.style.visibility = 'visible';
-				document.getElementById('userinfo').style.backgroundColor = '#363d40';
-			}
-			function mclose()
-			{
-				if(ddmenuitem) ddmenuitem.style.visibility = 'hidden';
-				document.getElementById('userinfo').style.backgroundColor = '#2a2c2e';
-			}
-			function mclosetime()
-			{
-				closetimer = window.setTimeout(mclose, timeout);
-			}
-			function mcancelclosetime()
-			{
-				if(closetimer)
-				{
-					window.clearTimeout(closetimer);
-					closetimer = null;
-				}
-			}
-			document.onclick = mclose; 
-		</script>
 	</div>
-	<div class="g-container">
-		<div class="g-main">
+	<div class="g-leftbar">
+		<ul class="m-menu">
+			<li><a href=""><span class="glyphicon glyphicon-search"></span> 文章</a></li>
+			<li><a href=""><span class="glyphicon glyphicon-search"></span> 文章</a></li>
+			<li><a href=""><span class="glyphicon glyphicon-search"></span> 文章</a></li>
+			<li><a href=""><span class="glyphicon glyphicon-search"></span> 文章</a></li>
+		</ul>
+	</div>
+	<div class="g-main">
