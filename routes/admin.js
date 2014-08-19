@@ -11,8 +11,10 @@ router.get('/', function(req, res) {
 	});
 });
 
-router.get('/add-post', function(req, res){
-	res.send('add-post');
+router.get('/post-new', function(req, res){
+	res.render('admin/post_new',{
+		title: '添加文章'
+	})
 })
 
 module.exports = router;
