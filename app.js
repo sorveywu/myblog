@@ -5,6 +5,10 @@ var logger       = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser   = require('body-parser');
 
+//连接数据库
+var mongoose = require('mongoose');
+var db = mongoose.connect('mongodb://127.0.0.1/blog');
+
 //使用session
 var session      = require('express-session');
 var MongoStore   = require('connect-mongo')(session);
@@ -73,7 +77,6 @@ app.use(function(err, req, res, next) {
         error: {}
     });
 });
-
 
 module.exports = app;
 

@@ -8,6 +8,7 @@
 	<link rel="stylesheet" type="text/css" href="/stylesheets/style.css">
 	<script src="/jquery/dist/jquery.min.js"></script>
 	<script src="/bootstrap/dist/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="/javascripts/moment.js"></script>
 </head>
 <body>
 	<div class="g-header">
@@ -39,7 +40,7 @@
 			var closetimer= 0;
 			var ddmenuitem = 0;
 			function mopen(id)
-			{	
+			{
 				mcancelclosetime();
 				if(ddmenuitem) ddmenuitem.style.visibility = 'hidden';
 				ddmenuitem = document.getElementById(id);
@@ -63,7 +64,7 @@
 					closetimer = null;
 				}
 			}
-			document.onclick = mclose; 
+			document.onclick = mclose;
 		</script>
 	</div>
 	<div class="g-container">

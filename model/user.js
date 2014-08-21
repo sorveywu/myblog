@@ -1,7 +1,5 @@
 var mongoose = require('mongoose');
-var db = mongoose.connect('mongodb://127.0.0.1/blog');
 var	Schema = mongoose.Schema;
-
 
 var UserSchema = new Schema({
 	email: {
@@ -44,4 +42,3 @@ var UserModel = mongoose.model('user', UserSchema, 'user');
 
 module.exports = UserModel;
 
-	
