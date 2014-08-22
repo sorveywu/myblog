@@ -41,7 +41,7 @@ router.post('/login', function(req, res){
 		}
 	})
 
-	
+
 })
 
 router.get('/reg', checkNotLogin);
@@ -62,7 +62,7 @@ router.post('/reg', function(req, res){
 		res.redirect('reg');
 	}else if(password != repassword){
 		req.flash('error', '密码与确认密码不一致！');
-		res.redirect('reg');	
+		res.redirect('reg');
 	}else{
 		User.findByEmail(email, function(err, doc){
 			if(err){

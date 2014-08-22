@@ -22,7 +22,12 @@ router.get('/', function(req, res) {
 
 router.get('/post/:id', function(req, res){
 	var id = req.params.id;
-	res.send(id);
+	Post.findById(id, function(err, doc){
+		res.render('home/index', {
+			doc: doc
+		})
+	})
+
 })
 
 module.exports = router;

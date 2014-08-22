@@ -40,7 +40,12 @@ router.post('/post-add', function(req, res){	//文章添加处理
 		}
 	})
 })
+router.get('/post-list', checkLogin);
+router.get('/post-list', function(req, res){
+	res.render('admin/post_list', {
 
+	})
+})
 
 function checkLogin(req, res, next){	//判断用户是不是已登录
 	if(!req.session.user){
