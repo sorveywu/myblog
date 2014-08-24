@@ -34,7 +34,7 @@ router.post('/login', function(req, res){
 	var count = User.findOne(user, 'email meta', function(err, doc){
 		if(doc){
 			req.session.user = doc;
-			res.redirect('/admin');
+			res.redirect('/');
 		}else{
 			req.flash('error', '用户名或密码错误！');
 			res.redirect('login');

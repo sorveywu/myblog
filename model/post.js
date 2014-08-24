@@ -31,7 +31,7 @@ var PostSchema = new Schema({
 
 PostSchema.statics = {
 	findAll : function(cb){
-		return this.find({}, 'title author summary meta comments tags').exec(cb);
+		return this.find({}, 'title author category summary meta comments tags').exec(cb);
 	},
 	findById: function(id, cb){
 		return this.findOne({_id: id}).exec(cb);

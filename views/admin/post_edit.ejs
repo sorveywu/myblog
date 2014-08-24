@@ -1,17 +1,18 @@
 <% include header %>
-	<form action="/admin/post-add" method="post">
+	<form action="/admin/post-update" method="post">
 	<div class="g-wrap-left">
 		<script type="text/javascript" charset="utf-8" src="/javascripts/ueditor/ueditor.config.js"></script>
 	    <script type="text/javascript" charset="utf-8" src="/javascripts/ueditor/ueditor.all.min.js"> </script>
 	    <script type="text/javascript" charset="utf-8" src="/javascripts/ueditor/lang/zh-cn/zh-cn.js"></script>
 		<div class="u-page-header">
-			添加新文章
+			编辑文章
 		</div>
 		<div class="m-form">
 			<div class="u-block"></div><div class="u-block"></div>
-			<input type="text" name="title" class="form-control" placeholder="文章标题">
+			<input type="hidden" name="postid" value="<%= doc.id %>" />
+			<input type="text" name="title" class="form-control" value="<%= doc.title %>" placeholder="文章标题">
 			<div class="u-block"></div><div class="u-block"></div><div class="u-block"></div>
-			<script id="editor" type="text/plain" name="body" style="width:100%;height:370px;"></script>
+			<script id="editor" type="text/plain" name="body" style="width:100%;height:370px;"><%- doc.body %></script>
 			<script type="text/javascript">
                 UE.getEditor('editor');
             </script>
@@ -44,7 +45,7 @@
 			<div class="m-box-content">
 				<div class="form-inline">
 					<label for="tags" class="sr-only">tags</label>
-					<input type="text" name="tags" class="form-control" style="width: 200px;">
+					<input type="text" name="tags" class="form-control" value="<%= doc.tag %>" style="width: 200px;">
 					<button type="button" class="btn btn-info pull-right">添加</button>
 					<span class="help-block">多个标签请用英文逗号（,）分开</span>
 				</div>
@@ -54,14 +55,14 @@
 		<div class="m-right-box">
 			<div class="u-box-title">文章简介</div>
 			<div class="m-box-content">
-				<textarea name="summary" class="form-control f-fs1" rows="3"></textarea>
+				<textarea name="summary" class="form-control f-fs1" rows="3"><%= doc.summary %></textarea>
 			</div>
 		</div>
 		<div class="u-block"></div>
 		<div class="m-right-box">
 			<div class="u-box-title">发布</div>
 			<div class="m-box-content f-tar">
-				<button class="btn btn-primary">发布</button>
+				<button class="btn btn-primary">提交</button>
 				　　
 				<button　type="button" class="btn btn-danger">取消</button>
 			</div>

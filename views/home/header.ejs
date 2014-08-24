@@ -27,7 +27,7 @@
 				<li><a href="#" id="userinfo" onmouseover="mopen('m-userinfo')" onmouseout="mclosetime()"><img src="http://www.gravatar.com/avatar/<%= user.email.md5 %>?size=36" alt="sorvey" class="img-circle f-b2"></a></li>
 				<div id="m-userinfo" class="m-userinfo" onMouseOver="mcancelclosetime()" onMouseOut="mclosetime()" style="visibility:hidden">
 		            <div class="u-user-block"><a href="/user/details"><span class="glyphicon glyphicon-user"></span>　Sorvey</a></div>
-		            <div class="u-user-block"><a href="/admin/add-post"><span class="glyphicon glyphicon-pencil"></span>　新建文章</a></div>
+		            <div class="u-user-block"><a href="/admin/post-new"><span class="glyphicon glyphicon-pencil"></span>　新建文章</a></div>
 		            <div class="u-user-block"><a href="/admin"><span class="glyphicon glyphicon-cog"></span>　后台管理</a></div>
 		       		<div class="u-user-block"><a href="/user/logout"><span class="glyphicon glyphicon-log-out"></span>　退出</a></div>
 		        </div>
@@ -64,7 +64,7 @@
 					closetimer = null;
 				}
 			}
-			document.onclick = mclose;
+			//document.onclick = mclose;
 		</script>
 	</div>
 	<div class="g-container">

@@ -1,3 +1,30 @@
 <% include header %>
-<%= doc.body %>
+<div class="m-content f-fl">
+	<div class="u-post-title">
+		<h1><%= doc.title %></h1>
+		<div class="u-post-info">
+			作者：<%= doc.author %>　分类：<%= doc.category %>　 发布时间：<%= doc.createAt %>
+		</div>
+		<div class="u-post-tags">
+			TAGS：
+			<% doc.tags.forEach(function(tag){ %>
+				<span class="label label-default"><%= tag %></span>
+			<% }) %>
+		</div>
+	</div>
+	<div class="u-post-body">
+		<%- doc.body %>		
+	</div>
+
+</div>
+<div class="m-rightbar f-fr">
+	<div class="u-avatar f-fl">
+		<% if(user){ %>
+		<img src="http://www.gravatar.com/avatar/<%= user.email.md5 %>?size=220" alt="sorvey" />
+		<% }else{ %>
+		<img src="http://www.gravatar.com/avatar/4a3d6da8a223c4266e3c04fddc5e4fac?size=220" alt="sorvey" />
+		<% } %>
+	</div>
+</div>
+<div class="f-cl"></div>
 <% include footer %>
