@@ -1,4 +1,4 @@
-var mongoose = require('mongoose');
+var mongoose = require('../connect');
 var	Schema = mongoose.Schema;
 
 var PostSchema = new Schema({

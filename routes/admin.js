@@ -5,6 +5,7 @@
 var express = require('express');
 var router = express.Router();
 var Post = require('../model/post');
+var Category = require('../model/category');
 var moment = require('moment');
 
 router.get('/', checkLogin);
@@ -46,7 +47,7 @@ router.get('/post-list', function(req, res){
 	Post.findAll(function(err, docs){
 		if(err){
 			console.log(err);
-		}else{			
+		}else{
 			docs.forEach(function(doc){
 				doc.createAt = moment(doc.meta.createAt).format('YYYY-MM-DD HH:mm:ss');
 				doc.pic = '/images/pic.png';
@@ -57,6 +58,7 @@ router.get('/post-list', function(req, res){
 		}
 	})
 })
+//文章编辑
 router.get('/post-edit/:id', checkLogin);
 router.get('/post-edit/:id', function(req, res){
 	var id = req.params.id;
@@ -68,6 +70,7 @@ router.get('/post-edit/:id', function(req, res){
 		})
 	})
 })
+//文章更新处理
 router.post('/post-update', checkLogin);
 router.post('/post-update', function(req, res){
 	var id = req.body.postid;
@@ -91,7 +94,128 @@ router.post('/post-update', function(req, res){
 		}
 	})
 })
+//分类目录
+router.get('/cate-list', checkLogin);
+router.get('/cate-list', function(req, res){
+	Category.findAllCate(function(err, docs){
+		docs.forEach(function(doc){
+			doc.createAt = moment(doc.meta.createAt).format('YYYY-MM-DD HH:mm:ss');
+			Post.count({'category' : doc.name}, function(err, count){
+				doc.count = count;
+			})
+		})
+		res.render('admin/cate_list', {
+			docs: docs
+		})
+	})
+})
+//添加分类
+router.post('/cate-add', checkLogin);
+router.post('/cate-add', function(req, res){
+	var parent = req.body.parent;
+	var arr = parent.split('_');
+	var deepth = (arr[0] == '0') ? 0 : 1;
+	if(arr[0] == '0'){
+		arr[1] = '';
+	}
 
+	var data = {
+		name: req.body.name,
+		cname: req.body.cname,
+		deepth: deepth,
+		parent: {
+			pid: arr[0],
+			pname: arr[1]
+		},
+		description: req.body.description,
+		status : req.body.status,
+		meta:{
+			createAt: Date.now(),
+			updateAt: Date.now()
+		},
+		author: req.session.user.email.normal
+	}
+
+	Category.create(data, function(err, doc){
+		if(err){
+			console.log(err);
+		}else{
+			res.redirect('cate-list');
+		}
+	})
+})
+//删除分类
+router.get('/cate-delete', checkLogin);
+router.get('/cate-delete', function(req, res){
+	var id = req.query.id;
+	Category.remove({_id: id}, function(err, doc){
+		if(err){
+			console.log(err);
+		}else{
+			res.redirect('cate-list');
+		}
+	})
+})
+//修改分类
+router.get('/cate-edit', checkLogin);
+router.get('/cate-edit', function(req, res){
+	var id = req.query.id;
+	if(!id){
+		res.send('404 test');
+	}else{
+		Category.findById(id, function(err, doc){
+			if(err){
+				console.log(err);
+			}else{
+				Category.findAllCate(function(err, result){
+					if(err){
+						console.log(err);
+					}else{
+						res.render('admin/cate_edit', {
+							doc: doc,
+							result: result
+						})
+					}
+				})
+			}
+		})
+	}
+})
+//分类更新处理
+router.post('/cate-update', checkLogin);
+router.post('/cate-update', function(req, res){
+	var id = req.body.cateid;
+	var parent = req.body.parent;
+	var arr = parent.split('_');
+	var deepth = (arr[0] == '0') ? 0 : 1;
+	if(arr[0] == '0'){
+		arr[1] = '';
+	}
+
+	var data = {
+		name: req.body.name,
+		cname: req.body.cname,
+		deepth: deepth,
+		parent: {
+			pid: arr[0],
+			pname: arr[1]
+		},
+		description: req.body.description,
+		status : req.body.status,
+		meta:{
+			createAt: Date.now(),
+			updateAt: Date.now()
+		},
+		author: req.session.user.email.normal
+	}
+	Category.update({_id: id}, data, function(err, doc){
+		if(err){
+			console.log(err);
+		}else{
+			res.redirect('cate-list');
+		}
+	})
+})
 
 function checkLogin(req, res, next){	//判断用户是不是已登录
 	if(!req.session.user){

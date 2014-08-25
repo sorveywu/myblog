@@ -1,0 +1,101 @@
+<% include header %>
+<div class="g-wrap-left">
+	<div class="u-page-header">
+		分类目录
+	</div>
+	<div class="m-table">
+		<table class="table table-bordered table-striped table-hover">
+			<thead>
+				<tr>
+					<th style="width: 30px;"><input type="checkbox" /></th>
+					<th>名称</th>
+					<th>别名</th>
+					<th>文章</th>
+					<th>发布时间</th>
+					<th>添加人</th>
+					<th>状态</th>
+					<th>操作</th>
+				</tr>
+			</thead>
+			<tbody>
+				<% docs.forEach(function(doc){ %>
+				<tr>
+					<td><input type="checkbox" /></td>
+					<td><a href="/admin/cate-edit?id=<%= doc.id %>"><%= doc.name %></td>
+					<td><%= doc.cname %></td>
+					<td><%= doc.count %></td>
+					<td><%= doc.createAt %></td>
+					<td><%= doc.author %></td>
+					<td><% if(doc.status == 1){ %>是<% }else{ %><font class="text-danger">否</font><% } %></td>
+					<td>
+						<a href="/admin/cate-edit?id=<%= doc.id %>">编辑</a> /
+						<a href="/admin/cate-delete?id=<%= doc.id %>">删除</a>
+					</td>
+				</tr>
+				<% }) %>
+			</tbody>
+		</table>
+	</div>
+</div>
+
+<div class="g-wrap-right f-fr">
+	<div class="m-right-box">
+		<div class="u-box-title">添加分类</div>
+		<div class="m-box-content m-form-box">
+			<form class="form" role="form" method="post" action="/admin/cate-add">
+				<div class="form-group">
+				    <label for="name">名称：</label>
+				    <input type="text" name="name" class="form-control input-sm" id="name">
+				    <span class="help-block">这将是它在站点上显示的名字。</span>
+				</div>
+				<div class="u-block"></div>
+				<div class="form-group">
+				    <label for="cname">别名：</label>
+				    <input type="text" name="cname" class="form-control input-sm" id="cname">
+				    <span class="help-block">“别名”是在URL中使用的别称，它可以令URL更美观。通常使用小写，只能包含字母，数字和连字符（-）。</span>
+				</div>
+				<div class="u-block"></div>
+				<div class="form-group">
+				    <label for="exampleInputPassword1">父级：</label>
+				    <select name="parent" class="form-control input-sm">
+				    	<option value="0">无</option>
+					    <% docs.forEach(function(doc){ %>
+					    <option value="<%= doc.id + '_' + doc.name %>"><%= doc.name %></option>
+					    <% }) %>
+				    </select>
+				</div>
+				<div class="u-block"></div>
+				<div class="form-group">
+				    <label for="description">描述：</label>
+				    <textarea name="description" id="description" class="form-control f-fs1" rows="4"></textarea>
+				</div>
+				<div class="u-block"></div>
+				<div class="form-group">
+				    <labels>是否可用：</label>
+				    <label class="radio-inline">
+					  	<input type="radio" name="status" id="status" value="1" checked>　是
+					</label>
+					<label class="radio-inline">
+						<input type="radio" name="status" id="status" value="0">　否
+					</label>
+				</div>
+				<div class="u-block"></div>
+				<div class="form-group f-tar">
+						<button class="btn btn-primary btn-sm">添加</button>
+						　　
+						<button　type="button" class="btn btn-danger btn-sm">重置</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+<script>
+	$(document).ready(function(){
+	  	$('input').iCheck({
+	    	checkboxClass: 'icheckbox_minimal-blue',
+	    	radioClass: 'iradio_minimal-blue',
+	   		increaseArea: '20%'
+	  	});
+	});
+</script>
+<% include footer %>
