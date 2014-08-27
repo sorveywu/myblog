@@ -16,21 +16,31 @@ router.get('/', function(req, res) {	//后台首页
 });
 router.get('/post-new', checkLogin);
 router.get('/post-new', function(req, res){		//文章添加页
-	res.render('admin/post_new',{
-		title: '添加文章'
+	Category.findAllCate(function(err, docs){
+		res.render('admin/post_new',{
+			title: '添加文章',
+			cate: docs
+		})
 	})
 })
 router.post('/post-add', checkLogin)
 router.post('/post-add', function(req, res){	//文章添加处理
-	var tagArr = req.body.tags;
-	var tagArr = tagArr.split(',');
-	var str = req.body.summary;
-	var summary = str.substr(0, 55) + '...';
+	var tagStr = req.body.tags,
+	 	summaryStr = req.body.summary,
+		cateStr = req.body.category;
+
+	var summary = summaryStr.substr(0, 55) + '...',
+		tagArr = tagStr.split(','),
+		cateArr = cateStr.split('/');
+
 	var data = {
 		title: req.body.title,
 		body: req.body.body,
 		author: req.session.user.email.normal,
-		category: req.body.category,
+		category: {
+			name: cateArr[0],
+			cname: cateArr[1]
+		},
 		summary: summary,
 		tags: tagArr
 	}
@@ -44,53 +54,95 @@ router.post('/post-add', function(req, res){	//文章添加处理
 })
 router.get('/post-list', checkLogin);
 router.get('/post-list', function(req, res){
-	Post.findAll(function(err, docs){
-		if(err){
-			console.log(err);
-		}else{
-			docs.forEach(function(doc){
-				doc.createAt = moment(doc.meta.createAt).format('YYYY-MM-DD HH:mm:ss');
-				doc.pic = '/images/pic.png';
-			})
-			res.render('admin/post_list', {
-				docs: docs
-			})
-		}
-	})
+	var cate = req.query.cate;
+	if(cate){
+		Post.find({'category.cname': cate},function(err, docs){
+			if(err){
+				console.log(err);
+			}else{
+				docs.forEach(function(doc){
+					doc.createAt = moment(doc.meta.createAt).format('YYYY-MM-DD HH:mm:ss');
+					doc.pic = '/images/pic.png';
+				})
+				res.render('admin/post_list', {
+					docs: docs
+				})
+			}
+		})
+	}else{
+		Post.findAll(function(err, docs){
+			if(err){
+				console.log(err);
+			}else{
+				docs.forEach(function(doc){
+					doc.createAt = moment(doc.meta.createAt).format('YYYY-MM-DD HH:mm:ss');
+					doc.pic = '/images/pic.png';
+				})
+				res.render('admin/post_list', {
+					docs: docs
+				})
+			}
+		})
+	}
 })
 //文章编辑
-router.get('/post-edit/:id', checkLogin);
-router.get('/post-edit/:id', function(req, res){
-	var id = req.params.id;
+router.get('/post-edit', checkLogin);
+router.get('/post-edit', function(req, res){
+	var id = req.query.id;
 	Post.findById(id, function(err, doc){
-		doc.tag = doc.tags.join();
-
-		res.render('admin/post_edit', {
-			doc: doc
-		})
+		if(err){
+			res.render('404');
+		}else{
+			doc.tag = doc.tags.join();
+			Category.findAllCate(function(err, cates){
+				res.render('admin/post_edit', {
+					doc: doc,
+					cates: cates
+				})
+			})
+		}
 	})
 })
 //文章更新处理
 router.post('/post-update', checkLogin);
 router.post('/post-update', function(req, res){
-	var id = req.body.postid;
-	var tagArr = req.body.tags;
-	var tagArr = tagArr.split(',');
-	var str = req.body.summary;
-	var summary = str.substr(0, 55) + '...';
+	var id = req.body.postid,
+		tagStr = req.body.tags,
+	 	summaryStr = req.body.summary,
+		cateStr = req.body.category;
+
+	var summary = summaryStr.substr(0, 55) + '...',
+		tagArr = tagStr.split(','),
+		cateArr = cateStr.split('/');
+
 	var data = {
 		title: req.body.title,
 		body: req.body.body,
 		author: req.session.user.email.normal,
-		category: req.body.category,
+		category: {
+			name: cateArr[0],
+			cname: cateArr[1]
+		},
 		summary: summary,
 		tags: tagArr
 	}
+
 	Post.update({_id: id}, data, function(err){
 		if(err){
 			console.log(err);
 		}else{
 			res.redirect('back');
+		}
+	})
+})
+//文章删除
+router.get('/post-delete', function(req, res){
+	var id = req.query.id;
+	Post.remove({_id : id}, function(err, doc){
+		if(err){
+			return console.log(err);
+		}else{
+			res.redirect('post-list');
 		}
 	})
 })
@@ -100,15 +152,13 @@ router.get('/cate-list', function(req, res){
 	Category.findAllCate(function(err, docs){
 		docs.forEach(function(doc){
 			doc.createAt = moment(doc.meta.createAt).format('YYYY-MM-DD HH:mm:ss');
-			Post.count({'category' : doc.name}, function(err, count){
-				doc.count = count;
-			})
 		})
 		res.render('admin/cate_list', {
 			docs: docs
 		})
 	})
 })
+
 //添加分类
 router.post('/cate-add', checkLogin);
 router.post('/cate-add', function(req, res){

@@ -21,21 +21,11 @@
 		<div class="m-right-box">
 			<div class="u-box-title">分类目录</div>
 			<div class="m-box-content">
+				<% cate.forEach(function(vo){ %>
 				<div class="u-category f-ib">
-					<label><input type="radio" name="category" value="php">　php</label>
+					<label><input type="radio" name="category" value="<%= vo.name %>/<%= vo.cname %>">　<%= vo.name %></label>
 				</div>
-				<div class="u-category f-ib">
-					<label><input type="radio" name="category" value="Nodejs">　Nodejs</label>
-				</div>
-				<div class="u-category f-ib">
-					<label><input type="radio" name="category" value="前端">　前端</label>
-				</div>
-				<div class="u-category f-ib">
-					<label><input type="radio" name="category" value="随笔">　随笔</label>
-				</div>
-				<div class="u-category f-ib">
-					<label><input type="radio" name="category" value="娱乐">　娱乐</label>
-				</div>
+				<% }) %>
 			</div>
 		</div>
 		<div class="u-block"></div>

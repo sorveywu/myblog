@@ -22,12 +22,16 @@ router.get('/', function(req, res) {
 router.get('/post/:id', function(req, res){
 	var id = req.params.id;
 	Post.findById(id, function(err, doc){
-		doc.createAt = moment(doc.meta.createAt).format('YYYY-MM-DD HH:mm:ss');
-		res.render('home/post', {
-			title: doc.title + ' - 一个奔向工程师的程序员',
-	  		doc: doc,
-	  		user: req.session.user
-		})
+		if(err){
+			res.render('404');
+		}else{
+			doc.createAt = moment(doc.meta.createAt).format('YYYY-MM-DD HH:mm:ss');
+			res.render('home/post', {
+				title: doc.title + ' - 一个奔向工程师的程序员',
+		  		doc: doc,
+		  		user: req.session.user
+			})
+		}
 	})
 })
 

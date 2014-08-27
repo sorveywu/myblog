@@ -3,7 +3,10 @@ var	Schema = mongoose.Schema;
 
 var PostSchema = new Schema({
 	title: String,
-	category: String,
+	category: {
+		name: String,
+		cname: String
+	},
 	body: String,
 	summary: String,
 	author: String,
@@ -35,6 +38,11 @@ PostSchema.statics = {
 	},
 	findById: function(id, cb){
 		return this.findOne({_id: id}).exec(cb);
+	},
+	countPost: function(name){
+		this.count({'category' : '娱乐'}, function(err, doc){
+			return doc;
+		})
 	}
 }
 

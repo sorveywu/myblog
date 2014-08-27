@@ -10,7 +10,6 @@
 					<th style="width: 30px;"><input type="checkbox" /></th>
 					<th>名称</th>
 					<th>别名</th>
-					<th>文章</th>
 					<th>发布时间</th>
 					<th>添加人</th>
 					<th>状态</th>
@@ -21,9 +20,8 @@
 				<% docs.forEach(function(doc){ %>
 				<tr>
 					<td><input type="checkbox" /></td>
-					<td><a href="/admin/cate-edit?id=<%= doc.id %>"><%= doc.name %></td>
+					<td><a href="/admin/post-list?cate=<%= doc.cname %>"><%= doc.name %></td>
 					<td><%= doc.cname %></td>
-					<td><%= doc.count %></td>
 					<td><%= doc.createAt %></td>
 					<td><%= doc.author %></td>
 					<td><% if(doc.status == 1){ %>是<% }else{ %><font class="text-danger">否</font><% } %></td>
