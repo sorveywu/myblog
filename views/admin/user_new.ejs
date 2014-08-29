@@ -1,0 +1,77 @@
+<% include header %>
+<div class="g-wrap">
+	<div class="u-page-header">
+		添加用户
+	</div>
+	<div class="m-form-box f-wg">
+		<form class="form" role="form" method="post" action="/user/add">
+			<div class="form-group">
+			    <label for="name">邮箱：</label>
+			    <input type="text" name="email" class="form-control input-sm" id="email">
+			    <span class="help-block">登录用。</span>
+			</div>
+			<div class="u-block"></div>
+			<div class="form-group">
+			    <label for="password">密码：</label><font color="red">*</font>
+			    <input type="password" name="password" class="form-control input-sm" id="password">
+			</div>
+			<div class="u-block"></div>
+			<div class="form-group">
+			    <label for="repassword">确认密码：</label><font color="red">*</font>
+			    <input type="password" name="repassword" class="form-control input-sm" id="repassword">
+			</div>
+			<div class="u-block"></div>
+			<div class="form-group">
+			    <label for="nickname">昵称：</label>
+			    <input type="text" name="nickname" class="form-control input-sm" id="nickname">
+			    <span class="help-block">"昵称"用于页面上显示。</span>
+			</div>
+			<div class="u-block"></div>
+			<div class="form-group">
+			    <labels>性别：</label>
+			    <label class="radio-inline">
+				  	<input type="radio" name="sex" id="sex" value="1" checked />　男
+				</label>
+				<label class="radio-inline">
+					<input type="radio" name="sex" id="sex" value="0" />　女
+				</label>
+			</div>
+			<div class="u-block"></div>
+			<div class="form-group">
+			    <label for="age">年龄：</label>
+			    <input type="text" name="age" class="form-control input-sm" id="age">
+			</div>
+			<div class="u-block"></div>
+			<div class="form-group">
+			    <label for="description">个人简介：</label>
+			    <textarea name="description" id="description" class="form-control f-fs1" rows="4"></textarea>
+			</div>
+			<div class="u-block"></div>
+			<div class="form-group">
+			    <labels>是否可用：</label>
+			    <label class="radio-inline">
+				  	<input type="radio" name="status" id="status" value="1" checked>　是
+				</label>
+				<label class="radio-inline">
+					<input type="radio" name="status" id="status" value="0">　否
+				</label>
+			</div>
+			<div class="u-block"></div>
+			<div class="form-group f-tar">
+				<button class="btn btn-primary btn-sm">提交</button>
+					　　
+				<button　type="button" class="btn btn-danger btn-sm btn-back">取消</button>
+			</div>
+		</form>
+	</div>
+</div>
+<script>
+	$(document).ready(function(){
+	  	$('input').iCheck({
+	    	checkboxClass: 'icheckbox_minimal-blue',
+	    	radioClass: 'iradio_minimal-blue',
+	   		increaseArea: '20%'
+	  	});
+	});
+</script>
+<% include footer %>

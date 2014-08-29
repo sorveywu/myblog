@@ -1,0 +1,45 @@
+<% include header %>
+<div class="g-wrap">
+	<div class="u-page-header">
+		所有用户
+	</div>
+	<div class="m-table">
+		<table class="table table-bordered table-striped table-hover">
+			<thead>
+				<tr>
+					<th style="width: 30px;"><input type="checkbox" /></th>
+					<th>邮箱</th>
+					<th>昵称</th>
+					<th>注册时间</th>
+					<th>最后登录时间</th>
+					<th>操作</th>
+				</tr>
+			</thead>
+			<tbody>
+				<% user.forEach(function(vo){ %>
+				<tr>
+					<td><input type="checkbox" /></td>
+					<td><a href="/user/edit?id=<%= vo.id %>"><%= vo.email.normal %></td>
+					<td><%= vo.nickname %></td>
+					<td><%= vo.createAt %></td>
+					<td><%= vo.updateAt %></td>
+					<td>
+						<a href="/user/edit?id=<%= vo.id %>">编辑</a> /
+						<a href="/user/delete?id=<%= vo.id %>">删除</a>
+					</td>
+				</tr>
+				<% }) %>
+			</tbody>
+		</table>
+	</div>
+	<script>
+		$(document).ready(function(){
+		  	$('input').iCheck({
+		    	checkboxClass: 'icheckbox_minimal-blue',
+		    	radioClass: 'iradio_minimal-blue',
+		   		ncreaseArea: '20%'
+		  	});
+		});
+	</script>
+</div>
+<% include footer %>

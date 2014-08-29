@@ -6,11 +6,12 @@ var UserSchema = new Schema({
 		normal: String,
 		md5: String
 	},
-	password: String,
+	password: {type: String, default: ''},
 	nickname: String,
-	sex: Number,
-	age: Number,
-	status: Number,
+	sex: {type: Number, default: 1},
+	age: {type:Number, default: 0},
+	status: {type: Number, default: 1},
+	description: String,
 	meta: {
 		createAt: {
 			type: Date,
@@ -19,7 +20,12 @@ var UserSchema = new Schema({
 		updateAt: {
 			type: Date,
 			default: Date.now()
-		}
+		},
+		loginAt: {
+			type: Date,
+			default: Date.now()
+		},
+		loginIp: String
 	}
 })
 
@@ -29,6 +35,9 @@ UserSchema.statics = {
 	},
 	findUser : function(user, cb){
 		return this.findOne(user).exec(cb);
+	},
+	findAll: function(cb){
+		return this.find().exec(cb);
 	}
 }
 

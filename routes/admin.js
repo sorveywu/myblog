@@ -267,6 +267,7 @@ router.post('/cate-update', function(req, res){
 	})
 })
 
+
 function checkLogin(req, res, next){	//判断用户是不是已登录
 	if(!req.session.user){
 		req.flash('error', '您还没有登录！');
