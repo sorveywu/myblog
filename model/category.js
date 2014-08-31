@@ -14,7 +14,10 @@ var CateSchema = new Schema({
 		pname: String
 	},
 	description: String,
-	author: String,
+	author: {
+		email : String,
+		nickname: String
+	},
 	status:{
 		type: Number,
 		default: 1

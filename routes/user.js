@@ -32,7 +32,7 @@ router.post('/login', function(req, res){
 		},
 		password: pwd_md5.update(password).digest('hex')
 	}
-	var count = User.findOne(user, 'email meta', function(err, doc){
+	var count = User.findOne(user, 'email nickname meta', function(err, doc){
 		if(doc){
 			req.session.user = doc;
 			res.redirect('/');

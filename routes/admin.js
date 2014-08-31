@@ -36,7 +36,10 @@ router.post('/post-add', function(req, res){	//文章添加处理
 	var data = {
 		title: req.body.title,
 		body: req.body.body,
-		author: req.session.user.email.normal,
+		author: {
+			email: req.session.user.email.normal,
+			nickname: req.session.user.nickname
+		},
 		category: {
 			name: cateArr[0],
 			cname: cateArr[1]
@@ -118,7 +121,10 @@ router.post('/post-update', function(req, res){
 	var data = {
 		title: req.body.title,
 		body: req.body.body,
-		author: req.session.user.email.normal,
+		author: {
+			email: req.session.user.email.normal,
+			nickname: req.session.user.nickname
+		},
 		category: {
 			name: cateArr[0],
 			cname: cateArr[1]
@@ -183,7 +189,10 @@ router.post('/cate-add', function(req, res){
 			createAt: Date.now(),
 			updateAt: Date.now()
 		},
-		author: req.session.user.email.normal
+		author: {
+			email: req.session.user.email.normal,
+			nickname: req.session.user.nickname
+		}
 	}
 
 	Category.create(data, function(err, doc){
@@ -256,7 +265,10 @@ router.post('/cate-update', function(req, res){
 			createAt: Date.now(),
 			updateAt: Date.now()
 		},
-		author: req.session.user.email.normal
+		author: {
+			email: req.session.user.email.normal,
+			nickname: req.session.user.nickname
+		}
 	}
 	Category.update({_id: id}, data, function(err, doc){
 		if(err){
