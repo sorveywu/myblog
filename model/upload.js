@@ -30,10 +30,10 @@ var handleForm = function(req, res){
 			
 			var info = JSON.stringify({
 				"originalName": filename,
-                "name": newFilename,
-                "url": '/public/uploads/' + newFilename,
-                "type": ext,
-                "state": "SUCCESS"
+                		"name": newFilename,
+                		"url": '/public/uploads/' + newFilename,
+                		"type": ext,
+                		"state": "SUCCESS"
 			})
 			data.push(info);
 		}
