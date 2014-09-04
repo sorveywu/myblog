@@ -5,6 +5,8 @@ var logger       = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser   = require('body-parser');
 
+var busboy = require('connect-busboy');
+
 //使用session
 var session      = require('express-session');
 var MongoStore   = require('connect-mongo')(session);
@@ -15,11 +17,24 @@ var flash = require('connect-flash');
 var routes       = require('./routes/index');
 var user         = require('./routes/user');
 var admin         = require('./routes/admin');
+var upload         = require('./routes/upload');
 
 var app          = express();
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
+
+app.use(busboy({
+    highWaterMark: 2 * 1024 * 1024, // Max size of internal stream buffer
+    limits: {
+        fileSize: 10 * 1024 * 1024,
+        parts: 256,
+        files: 16,
+        headerPairs: 1000,
+        fieldSize: 1024,
+        fields: 128
+    }
+}));
 
 app.use(favicon());
 app.use(logger('dev'));
@@ -42,6 +57,7 @@ app.use(flash());
 app.use('/', routes);
 app.use('/user', user);
 app.use('/admin', admin);
+app.use('/upload', upload);
 
 /// catch 404 and forward to error handler
 app.use(function(req, res, next) {

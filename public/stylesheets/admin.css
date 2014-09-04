@@ -15,7 +15,7 @@ textarea{overflow:auto;resize:none;}
 label,summary{cursor:default;}
 a,button{cursor:pointer;}
 del,ins,u,s,a,a:hover{text-decoration:none;}
-body,textarea,input,button,select,keygen,legend{font:12px/1.14 /*\5fae\8f6f\96c5\9ed1,*/arial,\5b8b\4f53;color:#333333;outline:0; font-size: 12px;}
+body,textarea,input,button,select,keygen,legend{font:12px/1.14 \5fae\8f6f\96c5\9ed1,arial,\5b8b\4f53;color:#333333;outline:0; font-size: 12px;}
 body{background-color:#eeeff1;}
 a{color:#5e5e5e;}
 a:hover{ color:#c9394a;;}
@@ -95,7 +95,7 @@ box-shadow: 0 1px 1px rgba(0,0,0,.04);}
 box-shadow: 0 1px 1px rgba(0,0,0,.04);}
 .u-box-title{ width: 100%; height: 30px; line-height: 30px; font-size: 14px; border-bottom: 1px solid #f1f1f1; text-indent: 14px;}
 .m-box-content{ width: 100%; height: auto; padding: 10px 6px;}
-.u-category{ width: 110px; height: 30px; line-height: 30px; cursor: pointer; padding-left: 20px;}
+.u-category{ width: 120px; height: 30px; line-height: 30px; cursor: pointer; padding-left: 15px;}
 .u-category label{ cursor: pointer; font-size: 14px; font-weight: normal;}
 .m-table input[type='checkbox']{ margin-top: 0px;}
 .m-form-box{ padding: 10px 15px;}

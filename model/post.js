@@ -9,7 +9,10 @@ var PostSchema = new Schema({
 	},
 	body: String,
 	summary: String,
-	author: String,
+	author: {
+		email: String,
+		nickname: String
+	},
 	comments: [String],
 	tags: [String],
 	click: {

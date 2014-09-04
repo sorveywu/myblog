@@ -21,8 +21,8 @@
 				<tr>
 					<td><input type="checkbox" /></td>
 					<td><a href="/post/<%= doc.id %>" target="_blank"><%= doc.title %></td>
-					<td><%= doc.author %></td>
-					<td><%= doc.category.name %></td>
+					<td><%= doc.author.nickname %></td>
+					<td><a href="/admin/cate-list?cate=<%= doc.category.cname %>"><%= doc.category.name %></a></td>
 					<td><%= doc.comments.length %></td>
 					<td><%= doc.createAt %></td>
 					<td>

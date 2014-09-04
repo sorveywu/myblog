@@ -23,7 +23,7 @@
 					<td><a href="/admin/post-list?cate=<%= doc.cname %>"><%= doc.name %></td>
 					<td><%= doc.cname %></td>
 					<td><%= doc.createAt %></td>
-					<td><%= doc.author.nickname %></td>
+					<td><% if(doc.author.nickname){ %><%= doc.author.nickname %><% }else{ %><%= doc.author.email %><% } %></td>
 					<td><% if(doc.status == 1){ %>是<% }else{ %><font class="text-danger">否</font><% } %></td>
 					<td>
 						<a href="/admin/cate-edit?id=<%= doc.id %>">编辑</a> /
