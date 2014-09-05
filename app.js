@@ -25,11 +25,11 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
 app.use(busboy({
-    highWaterMark: 2 * 1024 * 1024, // Max size of internal stream buffer
+    highWaterMark: 2 * 1024 * 1024, // Max  sizeof internal stream buffer
     limits: {
-        fileSize: 10 * 1024 * 1024,
+        fileSize: 10 * 1024 * 1024, //上传文件限制到此大小
         parts: 256,
-        files: 16,
+        files: 1,
         headerPairs: 1000,
         fieldSize: 1024,
         fields: 128
