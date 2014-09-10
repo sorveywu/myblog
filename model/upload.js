@@ -32,6 +32,7 @@ var isDefined = function(str){
 }
 
 var handleForm = function(req, res){
+<<<<<<< HEAD
 	req.busboy.on('file', function(fieldname, file, filename){	//监听file表单
 		var ext = path.extname(filename);
 
@@ -53,6 +54,23 @@ var handleForm = function(req, res){
 			}
 		}else{
 			return	res.send(getError(-100));
+=======
+	var data = [];
+	req.busboy.on('file', function(fieldname, file, filename){
+		if(isDefined(filename)){
+			var ext = path.extname(filename);
+			var newFilename = (new Date() - 0) + ext;
+			handleFile(newFilename, file, uploadsPath);
+			
+			var info = JSON.stringify({
+				"originalName": filename,
+                		"name": newFilename,
+                		"url": '/public/uploads/' + newFilename,
+                		"type": ext,
+                		"state": "SUCCESS"
+			})
+			data.push(info);
+>>>>>>> origin/master
 		}
 	})
 
@@ -69,6 +87,7 @@ var handleForm = function(req, res){
     req.pipe(req.busboy);
 }
 
+<<<<<<< HEAD
 var getError = function(type, file){
 	var err = {};
 	switch(type){
@@ -107,3 +126,6 @@ Array.prototype.inArray = function (value){
 };
 
 module.exports = handleForm;
+=======
+module.exports = handleForm;
+>>>>>>> origin/master
