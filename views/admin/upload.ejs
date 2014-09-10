@@ -4,6 +4,7 @@
 
 <div class="uploadBox">
     <input id="file_upload" name="file_upload" type="file" multiple="false">
+    <input type="hidden" name="picid" class="picid" value="0">
 </div>
 
 <script type="text/javascript">
@@ -63,7 +64,9 @@
             //上传到服务器，服务器返回相应信息到data里
             'onUploadSuccess':function(file, data, response){
                 var data = jQuery.parseJSON(data);
-                console.log(data);
+                $(".fileName").html("<a href='__UPLOADS__/pictures/"+data[0].name+"' target='_blank'>"+data[0].name+"</a>");
+                $(".cancel").html("<a href=\"javascript:$('#file_upload').uploadify('cancel','*');\">x</a>");
+                $(".picid").val(data[0].id);
             }
         });
     });

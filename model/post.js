@@ -15,6 +15,7 @@ var PostSchema = new Schema({
 	},
 	comments: [String],
 	tags: [String],
+	pic: String,
 	click: {
 		type: Number,
 		default: 0
@@ -37,7 +38,7 @@ var PostSchema = new Schema({
 
 PostSchema.statics = {
 	findAll : function(cb){
-		return this.find({}, 'title author category summary meta comments tags').exec(cb);
+		return this.find({}, 'title author category summary meta comments tags pic').exec(cb);
 	},
 	findById: function(id, cb){
 		return this.findOne({_id: id}).exec(cb);

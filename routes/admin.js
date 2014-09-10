@@ -45,7 +45,8 @@ router.post('/post-add', function(req, res){    //文章添加处理
             cname: cateArr[1]
         },
         summary: summary,
-        tags: tagArr
+        tags: tagArr,
+        pic: req.body.pic
     }
     Post.create(data, function(err, doc){
         if(err){

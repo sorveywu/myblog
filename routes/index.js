@@ -8,7 +8,6 @@ router.get('/', function(req, res) {
 	Post.findAll(function(err, doc){
 		doc.forEach(function(doc){
 			doc.createAt = moment(doc.meta.createAt).format('YYYY-MM-DD HH:mm:ss');
-			doc.pic = '/images/pic.png';
 		})
 
 		res.render('home/index', {

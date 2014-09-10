@@ -15,12 +15,11 @@ var handleFile = function(filename, file, targetDir){
 	fstream = fs.createWriteStream(targetFile);
 	file.pipe(fstream);
 	file.on('data', function(info){
-		console.log('data');
+		
 	})
 
-	fstream.on('close', function(){
-		console.log('close');
-		//console.log('Saved file: ' + filename);
+	fstream.on('close', function(){		
+		console.log('Saved file: ' + filename);
 	});
 	fstream.on('error', function(err){
 		console.log('ERROR while saving file '+ filename);
@@ -40,13 +39,20 @@ var handleForm = function(req, res){
 				var newFilename = (new Date() - 0) + ext;
 				handleFile(newFilename, file, uploadsPath);
 				
-				var info = JSON.stringify({
+				/*var info = JSON.stringify({
 					"originalName": filename,
 	                "name": newFilename,
 	                "url": '/public/uploads/' + newFilename,
 	                "type": ext,
 	                "state": "SUCCESS"
-				})
+				})*/
+				var info = {
+					"originalName": filename,
+	                "name": newFilename,
+	                "url": '/public/uploads/' + newFilename,
+	                "type": ext,
+	                "state": "SUCCESS"
+				}
 				data.push(info);
 			}else{
 				return res.send(getError(-140));
@@ -57,12 +63,10 @@ var handleForm = function(req, res){
 	})
 
 	req.busboy.on('field', function(key, value, keyTruncated, valueTruncated) {	
-		console.log('field');
-        //res.send('key:' + key +',value:' + value + ',keyTruncated:' + keyTruncated + ',valueTruncated:' + valueTruncated);
+        console.log('key:' + key +',value:' + value + ',keyTruncated:' + keyTruncated + ',valueTruncated:' + valueTruncated);
     });
 
     req.busboy.on('finish', function() {
-    	console.log('finish');
     	res.send(data);
     });
 
