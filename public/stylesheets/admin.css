@@ -100,6 +100,10 @@ box-shadow: 0 1px 1px rgba(0,0,0,.04);}
 .m-table input[type='checkbox']{ margin-top: 0px;}
 .m-form-box{ padding: 10px 15px;}
 
+.u-post-pic{ position: relative;}
+.u-pic-del{ position: absolute; top:5px; right: 25px; font-size: 16px; color: #ccc; cursor: pointer;}
+.u-pic-del span:hover{ color: #000;}
+
 .g-wrap{ background: #ffffff; padding: 10px; height: auto!important; height: 500px; min-height: 500px;}
 
 /*chrome 滚动条样式*/

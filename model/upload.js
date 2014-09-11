@@ -1,6 +1,6 @@
 var fs = require('fs');
 var path = require('path');
-var uploadsPath = path.resolve('public/uploads') + '/';	//定义存储图片的路径
+var uploadsPath = path.resolve('public/uploads/pictures') + '/';	//定义存储图片的路径
 var data = [];
 var config = {
 	ext: ['.png', '.gif', '.jpg', '.jpeg'],
@@ -38,18 +38,10 @@ var handleForm = function(req, res){
 			if(config.ext.inArray(ext)){	//检查文件类型
 				var newFilename = (new Date() - 0) + ext;
 				handleFile(newFilename, file, uploadsPath);
-				
-				/*var info = JSON.stringify({
-					"originalName": filename,
-	                "name": newFilename,
-	                "url": '/public/uploads/' + newFilename,
-	                "type": ext,
-	                "state": "SUCCESS"
-				})*/
 				var info = {
 					"originalName": filename,
 	                "name": newFilename,
-	                "url": '/public/uploads/' + newFilename,
+	                "url": '/uploads/pictures/' + newFilename,
 	                "type": ext,
 	                "state": "SUCCESS"
 				}

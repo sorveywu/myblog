@@ -4,6 +4,8 @@
 		<script type="text/javascript" charset="utf-8" src="/javascripts/ueditor/ueditor.config.js"></script>
 	    <script type="text/javascript" charset="utf-8" src="/javascripts/ueditor/ueditor.all.min.js"> </script>
 	    <script type="text/javascript" charset="utf-8" src="/javascripts/ueditor/lang/zh-cn/zh-cn.js"></script>
+	    <script type="text/javascript" src="/javascripts/uploadify/jquery.uploadify.js"></script>
+		<link rel="stylesheet" type="text/css" href="/javascripts/uploadify/uploadify.css">
 		<div class="u-page-header">
 			编辑文章
 		</div>
@@ -50,6 +52,24 @@
 		</div>
 		<div class="u-block"></div>
 		<div class="m-right-box">
+			<div class="u-box-title">文章配图</div>
+			<div class="m-box-content">
+				<% if(doc.pic){ %>
+				<div class="u-post-pic f-tac"><a href="<%= doc.pic %>" target="_blank" class="u-post-pic"><img src="<%= doc.pic %>" alt="" width="210" height="120"></a><div class="u-pic-del" onclick="delPic('<%= doc.id %>')"><span class="glyphicon glyphicon-remove-circle"></span></div></div>
+				<div class="uploadBox f-dn">
+				    <input id="file_upload" name="file_upload" type="file" multiple="false">
+				    <input type="hidden" name="pic" class="pic" value="<%= doc.pic %>" />
+				</div>
+				<% }else{ %>
+				<div class="uploadBox">
+				    <input id="file_upload" name="file_upload" type="file" multiple="false">
+				    <input type="hidden" name="pic" class="pic" value="" />
+				</div>
+				<% } %>
+			</div>
+		</div>
+		<div class="u-block"></div>
+		<div class="m-right-box">
 			<div class="u-box-title">发布</div>
 			<div class="m-box-content f-tar">
 				<button class="btn btn-primary">提交</button>
@@ -66,6 +86,77 @@
 		    	radioClass: 'iradio_minimal-blue',
 		   		ncreaseArea: '20%'
 		  	});
+		  	$('#file_upload').uploadify({
+	            'auto': true,
+	            'successTimeout': 99999,
+	            'swf'      : '/javascripts/uploadify/uploadify.swf',
+	            'uploader' : '/upload/upload-pic',
+	            'height'   :25,
+	            'width'    :90,
+	            'buttonText':'添加文件...',
+	            //上传文件的大小限制
+	            'fileSizeLimit':'4MB',
+	            //上传数量
+	            'queueSizeLimit' : 1,
+	            'fileTypeExts':'*.jpg;*.jpge;*.gif;*.png',
+	            //在浏览窗口底部的文件类型下拉菜单中显示的文本
+	            'fileTypeDesc':'支持的格式：',
+	            //返回一个错误，选择文件的时候触发
+	            'onSelectError':function(file, errorCode, errorMsg){
+	                switch(errorCode) {
+	                    case -100:
+	                        alert("上传的文件数量已经超出系统限制的"+$('#file_upload').uploadify('settings','queueSizeLimit')+"个文件！");
+	                        break;
+	                    case -110:
+	                        alert("文件]  ["+file.name+"大小超出系统限制的"+$('#file_upload').uploadify('settings','fileSizeLimit')+"大小！");
+	                        break;
+	                    case -120:
+	                        alert("文件 ["+file.name+"] 大小异常！");
+	                        break;
+	                    case -130:
+	                        alert("文件 ["+file.name+"] 类型不正确！");
+	                        break;
+	                }
+	            },
+	            //选择上传文件后调用
+	            'onSelect' : function(file) {
+	                $("#file_upload").css({
+	                    width: "0px",
+	                    height: "0px",
+	                    overflow: "hidden"
+	                });
+	                $(".upbtn").show();
+	            },
+	            'onClearQueue': function(){
+	                $("#file_upload").css({
+	                    width: "auto",
+	                    height: "auto",
+	                    overflow: "visible"
+	                });
+	            },
+	            //检测FLASH失败调用
+	            'onFallback':function(){
+	                alert("您未安装FLASH控件，无法上传图片！请安装FLASH控件后再试。");
+	            },
+	            //上传到服务器，服务器返回相应信息到data里
+	            'onUploadSuccess':function(file, data, response){
+	                var data = jQuery.parseJSON(data);
+	                $(".fileName").html("<a href='__UPLOADS__/pictures/"+data[0].name+"' target='_blank'>"+data[0].name+"</a>");
+	                $(".cancel").html("<a href=\"javascript:$('#file_upload').uploadify('cancel','*');\">x</a>");
+	                $(".pic").val(data[0].url);
+	            }
+	        });
 		});
+
+		var delPic = function(id){		//删除配图
+			$.post('/admin/pic-del', {id: id}, function(doc){
+				if(doc.status){		//如果删除成功
+					$('.u-post-pic').remove();
+					$('.uploadBox').removeClass('f-dn');
+				}else{
+
+				}
+			})
+		}
 	</script>
 <% include footer %>

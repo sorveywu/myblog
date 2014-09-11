@@ -7,6 +7,7 @@ var router = express.Router();
 var Post = require('../model/post');
 var Category = require('../model/category');
 var moment = require('moment');
+var fs = require('fs');
 
 router.get('/', checkLogin);
 router.get('/', function(req, res) {    //后台首页
@@ -131,7 +132,8 @@ router.post('/post-update', function(req, res){
             cname: cateArr[1]
         },
         summary: summary,
-        tags: tagArr
+        tags: tagArr,
+        pic: req.body.pic
     }
 
     Post.update({_id: id}, data, function(err){
@@ -143,6 +145,7 @@ router.post('/post-update', function(req, res){
     })
 })
 //文章删除
+router.get('/cate-delete', checkLogin);
 router.get('/post-delete', function(req, res){
     var id = req.query.id;
     Post.remove({_id : id}, function(err, doc){
@@ -278,6 +281,45 @@ router.post('/cate-update', function(req, res){
             res.redirect('cate-list');
         }
     })
+})
+//删除文章图片
+router.post('/pic-del', checkLogin);
+router.post('/pic-del', function(req, res){
+    var id = req.body.id;
+    Post.findOne({_id: id}, 'pic', function(err, doc){
+        var url = 'public'+doc.pic;
+        fs.exists(url, function(result){    //判断图片是否存在
+            if(result){     //如果存在
+                Post.update({_id: id}, {pic: ''}, function(err, doc){       //清空数据库字段
+                    if(err){
+                        return console.log(err);
+                    }else{          
+                        fs.unlink(url, function(err){       //删除文件夹图片
+                            if(err){
+                                return console.log(err);
+                            }else{
+                                res.send({
+                                    status: 1,
+                                    msg: '图片删除成功'
+                                });
+                            }
+                        })
+                    }
+                })
+            }else{            //不存在
+                Post.update({_id: id}, {pic: ''}, function(err, doc){
+                    if(err){
+                        return console.log(err);
+                    }else{
+                        res.send({
+                            status: 0,
+                            msg: '文件不存在或已经删除'
+                        })
+                    }
+                })
+            }
+        })
+    })  
 })
 
 function checkLogin(req, res, next){    //判断用户是不是已登录
