@@ -43,12 +43,14 @@ PostSchema.statics = {
 	findById: function(id, cb){
 		return this.findOne({_id: id}).exec(cb);
 	},
-	countPost: function(name){
-		this.count({'category' : '娱乐'}, function(err, doc){
-			return doc;
-		})
+	findByPage: function(page, len, cb){
+		return this.find({}, 'title author category summary meta comments tags pic').skip((page-1)*len).sort({'meta.updateAt':-1}).limit(len).exec(cb);
+	},
+	findByCate: function(cate, page, len, cb){
+		return this.find({'category.cname': cate}, 'title author category summary meta comments tags pic').skip((page-1)*len).sort({'meta.updateAt':-1}).limit(len).exec(cb);
 	}
 }
+
 
 var PostModel = mongoose.model('post', PostSchema, 'post');
 

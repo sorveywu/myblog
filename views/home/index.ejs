@@ -9,6 +9,33 @@
 			<div class="u-info f-fr">作者：<%= vo.author.nickname %>　　发布时间：<%= vo.createAt %>　　评论数：<%= vo.comments.length %></div>
 		</div>
 	<% }) %>
+	<% if(pages > 1){ %>
+	<div class="m-pager f-tar">
+		<ul class="pagination">
+			<% if(isFirstPage){ %>
+			<li class="disabled"><a href="javascript:void(0);">首页</a></li>
+			<li class="disabled"><a href="javascript:void(0);">上一页</a></li>
+			<% }else{ %>
+			<li><a href="?page=1">首页</a></li>
+			<li><a href="?page=<%- page-1 %>">上一页</a></li>
+			<% } %>
+			<% for(var i=1; i<=pages; i++){ %>
+				<% if(page == i){ %>
+				<li class="active"><a  href="javascript:void(0);"><%= i %></a></li>
+				<% }else{ %>
+				<li><a  href="?page=<%= i %>"><%= i %></a></li>
+				<% } %>
+			<% } %>
+			<% if(isLastPage){ %>
+			<li class="disabled"><a href="javascript:void(0);">&raquo;</a></li>
+			<li class="disabled"><a href="javascript:void(0);">末页</a></li>
+			<% }else{ %>
+			<li><a href="?page=<%- page+1 %>">下一页</a></li>
+			<li><a href="?page=<%= pages %>">末页</a></li>
+			<% } %>
+		</ul>
+	</div>
+	<% } %>
 </div>
 <div class="m-rightbar f-fr">
 	<div class="u-avatar f-fl">

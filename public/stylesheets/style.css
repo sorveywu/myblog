@@ -73,7 +73,7 @@ a:hover{ color:#c9394a;;}
 .m-header-con{ margin: auto; width: 1002px; height: 60px;}
 .u-logo{ width: 100px; height: 60px;}
 .u-menu{ width: auto; height: 60px; padding-left: 20px;}
-.u-menu li{ float: left; display: inline; width: auto; padding: 0px 20px; line-height: 60px; text-align: center; font-size: 14px;}
+.u-menu li{ float: left; display: inline; width: auto; padding: 0px 16px; line-height: 60px; text-align: center; font-size: 14px;}
 .u-menu li a{ color: #b5bdc0;}
 .u-menu li a:hover,.u-header-link li a:hover{ color: #ffffff;}
 .u-header-link{ height: 60px; line-height: 60px; width: auto; position: relative;}
@@ -113,6 +113,7 @@ a:hover{ color:#c9394a;;}
 .g-page-title h1{ font-size: 18px; line-height: 40px; color: #4d5559; font-weight: normal; text-indent: 5px;}
 .m-login-box{ width: 400px; height: auto; margin: 40px 0px 0px 80px;}
 .form-horizontal .control-label { padding-top: 11px;}
+.m-pager{ width: 100%;}
 
 .g-footer{ width: 100%; height: 200px; background: #2a2c2e;}
 .g-foot-content{ width: 1002px; height: 130px; margin: auto; padding-top: 30px;}
