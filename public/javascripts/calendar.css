@@ -1,0 +1,8 @@
+/* 日历栏 */
+.u-calendar{ width: 100%; height: auto; padding-top: 20px;}
+.u-calendar-box{ width: 154px; height: auto; margin: auto; position: relative;}
+.u-calendar-box span{ display: inline-block; *display: inline; *zoom:1; width: 20px; height: 11px; background: #eeeeee; margin: 0px 1px; text-align: center; line-height: 11px;}
+.u-calendar-box .u-calendar-head{ background: #ffffff; color: #aaa; height:15px; line-height: 15px;}
+.u-calendar-box .u-calendar-main{ background: #d1d1d1;}
+.u-calendar-prev{ position: absolute; height: 25px; line-height: 25px; left: -20px; top: 40px; cursor: pointer;}
+.u-calendar-next{ position: absolute; height: 25px; line-height: 25px; right: -20px; top: 40px; cursor: pointer;}

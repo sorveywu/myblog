@@ -37,15 +37,9 @@
 	</div>
 	<% } %>
 </div>
-<div class="m-rightbar f-fr">
-	<div class="u-avatar f-fl">
-		<% if(user){ %>
-		<img src="http://www.gravatar.com/avatar/<%= user.email.md5 %>?size=220" alt="sorvey" />
-		<% }else{ %>
-		<img src="http://www.gravatar.com/avatar/4a3d6da8a223c4266e3c04fddc5e4fac?size=220" alt="sorvey" />
-		<% } %>
-	</div>
-</div>
+
+<% include sidebar %>
+
 <div class="f-cl"></div>
 <% include footer %>
 

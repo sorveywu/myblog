@@ -98,6 +98,9 @@ a:hover{ color:#c9394a;;}
 .u-info{ width:455px; height: 53px; padding: 33px 0px 0px 5px; line-height: 20px; color: #99a1a6;}
 .m-rightbar{ width: 220px; height: auto!important; height: 400px; min-height: 400px;}
 .u-avatar{ width: 220px; height: 220px;}
+.u-introduction{ width: 180px; height: auto; margin-left: 20px; padding: 20px 0px; border-bottom: 1px solid #d0d6d9;}
+.u-me{ font-size: 22px; color: #363d40;}
+.u-tag{ width: 100%; line-height: 18px; margin-top: 3px; color: #656e73;}
 
 .u-post-title{ width: 100%; height: auto; border-bottom: 1px dotted #ccc; padding: 15px 10px 5px 10px;}
 .u-post-title h1{ line-height: 40px; font-size: 20px; color: #666565; font-weight: normal;}
@@ -105,6 +108,15 @@ a:hover{ color:#c9394a;;}
 .u-post-tags{ height: 30px; line-height: 30px; width: 100%; color: #7b7b7b;}
 .u-post-tags .label{ padding: .2em .6em .2em;}
 .u-post-body{ padding: 10px 10px 0px 10px; font-size: 13px; line-height: 30px;}
+.u-introduce{ width: 100%; height: auto; border: 1px solid #ccc; padding: 5px; background: #f9f9f9;}
+.u-introduce-img{ width: 70px; padding: 1px; border: 1px solid #ccc;}
+.u-introduce-detail{ width: 650px; padding-right: 5px; line-height: 15px;}
+.u-introduce-detail h1{ padding: 3px 0px 5px 0px;}
+.m-comments{ width: 100%; height: auto; border-top: 1px dotted #ccc;}
+.m-comments-show{ width: 100%; height: auto; border-top: 1px dotted #ccc;}
+.m-comments-show span{ font-size: 24px;}
+.m-comments-box{ width: 100%; height: 25px; background: #f8f8f8; border-top: 1px solid #ccc;}
+
 
 /* login */
 .m-login-left{ width: 602px; height: auto!important; height: 300px; min-height: 300px; border-right: 1px solid #d0d6d9; margin: 30px 0px 30px 0px;}
@@ -123,6 +135,9 @@ a:hover{ color:#c9394a;;}
 .m-foot-link li a{ color: #8e999d;}
 .m-foot-link li a:hover{ color: #ffffff;}
 
+
+#box{float:left; position:relative;width:220px;}
+.u-float{ position:fixed;_position:absolute; top:0; z-index:220;}
 
 /*chrome 滚动条样式*/
 ::-webkit-scrollbar

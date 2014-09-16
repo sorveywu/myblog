@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var crypto = require('crypto');
 var moment = require('moment');
+var Cate = require('../model/category');
 
 var User = require('../model/user');
 
@@ -12,11 +13,14 @@ router.get('/', function(req, res) {
 
 router.get('/login', checkNotLogin);
 router.get('/login', function(req, res){
-	res.render('home/login', {
-		title: '用户登录',
-		user: req.session.user,
-		success: req.flash('success').toString(),
-		error: req.flash('error').toString()
+	Cate.findAllCate(function(err, cates){
+		res.render('home/login', {
+			title: '用户登录',
+			user: req.session.user,
+			cates: cates,
+			success: req.flash('success').toString(),
+			error: req.flash('error').toString()
+		})
 	})
 })
 router.post('/login', checkNotLogin);

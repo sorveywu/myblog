@@ -3,6 +3,7 @@ var router = express.Router();
 var Post = require('../model/post');
 var Cate = require('../model/category')
 var moment = require('moment');
+var crypto = require('crypto');
 
 /* GET home page. */
 router.get('/', function(req, res) {
@@ -73,7 +74,24 @@ router.get('/post/:id', function(req, res){
 	})
 })
 
-
-
+router.post('/commit-add', function(req, res){
+	var email_md5 = crypto.createHash('md5'),
+		id = req.body.id;
+	var comment = {
+		email: {
+			normal:	req.body.email,
+			md5: email_md5.update(req.body.email).digest('hex')
+		},
+		nickname: req.body.nickname,
+		body: req.body.comment
+	}
+	Post.update({_id: id}, {$push:{comments: comment}}, function(err, doc){
+		if(err){
+			return console.log(err);
+		}else{
+			res.send('success');
+		}
+	})
+})
 
 module.exports = router;

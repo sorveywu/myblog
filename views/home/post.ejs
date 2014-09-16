@@ -12,19 +12,57 @@
 			<% }) %>
 		</div>
 	</div>
-	<div class="u-post-body">
+	<div class="u-post-body f-fl">
 		<%- doc.body %>		
 	</div>
+	<div class="u-introduce f-fl">
+		<div class="u-introduce-img f-fl"><img src="http://www.gravatar.com/avatar/f5dd06c0d0534671749bbcc9bbfde458?size=66" alt="sorvey" /></div>
+		<div class="u-introduce-detail f-fr">
+		<h1>About Sorvey.Wu</h1>
+		My name is Wubian , I usually use "Sorvey" as my ID on the network. I was born & raised in the town of RuGao, then I am now in Changzhou, Jangsu. I'm really into beautiful design, blogging, movies, snooker , web surfing. I am a PHP Engineer, and i am also interested in Java ,Javascript ,Html5 ,Css and AS3.
+		</div>
+	</div>
+	<div class="u-block f-fl"></div><div class="u-block f-fl"></div>
+	<div class="m-comments f-fl">
+		<div class="u-block"></div><div class="u-block"></div>
+		<div class="form-horizontal">
+			<div class="form-group">
+			    <label for="inputEmail3" class="col-sm-1 control-label" style="width: 70px;">邮箱：</label>
+			    <div class="col-sm-6">
+			      	<input type="email" name="email" class="form-control input-sm" id="inputEmail3" placeholder="邮箱">
+			    </div>
+		  	</div>
+		  	<div class="form-group">
+			    <label for="nickname" class="col-sm-1 control-label" style="width: 70px;">昵称：</label>
+			    <div class="col-sm-6">
+			      	<input type="nickname" name="nickname" class="form-control input-sm" id="nickname" placeholder="昵称">
+			    </div>
+		  	</div>
+		  	<div class="form-group">
+			    <label for="comment" class="col-sm-1 control-label" style="width: 70px;">评论：</label>
+			    <div class="col-sm-10">
+			      	<textarea name="comment" id="comment" class="form-control" rows="4"></textarea>
+			    </div>
+		  	</div>
+		  	<div class="form-group">
+		  		<div class="col-sm-11 f-tar">
+			    	<button class="btn btn-primary btn-sm" onclick="commit_submit()">提交评论</button>
+			    </div>
+		  	</div>
+		  	<input type="hidden" value="<%= doc.id %>" name="postId" />
+	  	</div>
 
-</div>
-<div class="m-rightbar f-fr">
-	<div class="u-avatar f-fl">
-		<% if(user){ %>
-		<img src="http://www.gravatar.com/avatar/<%= user.email.md5 %>?size=220" alt="sorvey" />
-		<% }else{ %>
-		<img src="http://www.gravatar.com/avatar/4a3d6da8a223c4266e3c04fddc5e4fac?size=220" alt="sorvey" />
-		<% } %>
+	  	<% doc.comments.forEach(function(vo){ %>
+			<%= vo.nickname %>
+	  	<%	}) %>
+	</div>
+	<div class="m-comments-show f-fl">
+		<span>精彩评论:</span>
+		<div class="m-comments-box">
+			<div class="u-comments-author"></div>
+		</div>
 	</div>
 </div>
+<% include sidebar %>
 <div class="f-cl"></div>
 <% include footer %>

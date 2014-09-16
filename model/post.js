@@ -1,6 +1,24 @@
 var mongoose = require('../connect');
 var	Schema = mongoose.Schema;
 
+var Comment = new Schema({
+	email: {
+		normal: String,
+		md5: String
+	},
+	nickname: String,
+	website: String,
+	body: String,
+	meta: {
+		createAt: {
+			type: Date,
+			default: Date.now()
+		},
+		votes: Number,
+		favs: Number
+	}
+})
+
 var PostSchema = new Schema({
 	title: String,
 	category: {
@@ -13,7 +31,7 @@ var PostSchema = new Schema({
 		email: String,
 		nickname: String
 	},
-	comments: [String],
+	comments: [Comment],
 	tags: [String],
 	pic: String,
 	click: {
