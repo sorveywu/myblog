@@ -46,21 +46,34 @@
 		  	</div>
 		  	<div class="form-group">
 		  		<div class="col-sm-11 f-tar">
-			    	<button class="btn btn-primary btn-sm" onclick="commit_submit()">提交评论</button>
+			    	<button class="btn btn-primary btn-sm" onclick="comment_submit()">提交评论</button>
 			    </div>
 		  	</div>
 		  	<input type="hidden" value="<%= doc.id %>" name="postId" />
 	  	</div>
-
-	  	<% doc.comments.forEach(function(vo){ %>
-			<%= vo.nickname %>
-	  	<%	}) %>
 	</div>
 	<div class="m-comments-show f-fl">
-		<span>精彩评论:</span>
+		<span class="f-ib">精彩评论:</span>
+		<% doc.comments.forEach(function(vo, key){ %>
 		<div class="m-comments-box">
-			<div class="u-comments-author"></div>
+			<div class="u-comments-author">
+				<div class="u-comments-floor f-fl">					
+					<%= doc.comments.length-key %>楼　<%= vo.nickname %>
+				</div>
+				<div class="u-comments-date f-fr">					
+					发表于：<%= vo.createAt %>
+				</div>
+			</div>
+			<div class="u-comments-content">
+				<div class="u-comments-pic f-fl">
+					<img class="img-thumbnail" src="http://www.gravatar.com/avatar/<%= vo.email.md5 %>?size=48" alt="sorvey" />
+				</div>
+				<div class="u-comments-body f-fr f-tal"><%= vo.body %></div>
+				<div class="u-comments-tools f-fr f-tar"><a href="#">回复</a><% if(user){ %>&nbsp;&nbsp;&nbsp;<a href="#">删除</a><% } %></div>
+				<div class="f-cl"></div>
+			</div>
 		</div>
+		<%	}) %>
 	</div>
 </div>
 <% include sidebar %>

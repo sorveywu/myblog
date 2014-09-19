@@ -6,9 +6,9 @@ var Comment = new Schema({
 		normal: String,
 		md5: String
 	},
-	nickname: String,
-	website: String,
-	body: String,
+	nickname: {type:String, default: ''},
+	website: { type:String, default: ''},
+	body: { type:String, default: ''},
 	meta: {
 		createAt: {
 			type: Date,

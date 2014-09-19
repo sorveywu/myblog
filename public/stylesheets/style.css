@@ -114,8 +114,14 @@ a:hover{ color:#c9394a;;}
 .u-introduce-detail h1{ padding: 3px 0px 5px 0px;}
 .m-comments{ width: 100%; height: auto; border-top: 1px dotted #ccc;}
 .m-comments-show{ width: 100%; height: auto; border-top: 1px dotted #ccc;}
-.m-comments-show span{ font-size: 24px;}
-.m-comments-box{ width: 100%; height: 25px; background: #f8f8f8; border-top: 1px solid #ccc;}
+.m-comments-show span{ font-size: 20px; padding: 10px 0px;}
+.m-comments-box{ width: 100%; height: auto; border-top: 1px solid #ccc;}
+.u-comments-author{ width: 100%; height: 25px; background: #f8f8f8; line-height: 25px;}
+.u-comments-floor{ padding-left: 10px;}.u-comments-date{ padding-right: 10px; color: #999999;}
+.u-comments-content{ width: 100%; height: auto; padding: 10px 5px 0px 5px;}
+.u-comments-pic{ width: 55px; height: 55px;}
+.u-comments-body{ width: 670px; padding: 5px; min-height: !important; height: 40px; min-height: 40px; font-size: 14px;}
+.u-comments-tools{ width: 670px; height: 25px; line-height: 15px; padding: 5px;}
 
 
 /* login */

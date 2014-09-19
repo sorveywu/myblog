@@ -62,6 +62,10 @@ router.get('/post/:id', function(req, res){
 			res.render('404');
 		}else{
 			doc.createAt = moment(doc.meta.createAt).format('YYYY-MM-DD HH:mm:ss');
+			doc.comments.forEach(function(vo){
+				vo.createAt = moment(vo.meta.createAt).format('YYYY-MM-DD HH:mm:ss');
+			})
+			doc.comments = doc.comments.reverse();	//数组倒序反转
 			Cate.findAllCate(function(err, cates){
 				res.render('home/post', {
 					title: doc.title + ' - 一个奔向工程师的程序员',
@@ -74,7 +78,7 @@ router.get('/post/:id', function(req, res){
 	})
 })
 
-router.post('/commit-add', function(req, res){
+router.post('/comment-add', function(req, res){
 	var email_md5 = crypto.createHash('md5'),
 		id = req.body.id;
 	var comment = {
@@ -89,7 +93,8 @@ router.post('/commit-add', function(req, res){
 		if(err){
 			return console.log(err);
 		}else{
-			res.send('success');
+			comment.createAt = moment(new Date()).format('YYYY-MM-DD HH:mm:ss');
+			res.send(comment);
 		}
 	})
 })
